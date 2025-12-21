@@ -1,7 +1,7 @@
 import subprocess
 import datetime
 #!/usr/bin/env python3
-__version__ = "v0.3.2 (2025-12-21)"  # 2025-12-21
+__version__ = "v0.3.3 (2025-12-21)"  # 2025-12-21
 __repo_note__ = "events runner (ROI + persistence) - reproducibility stamp"
 
 import argparse, csv, json, math
@@ -272,6 +272,7 @@ def resolve_out_dir(run_folder: Path, roi_id: str, out_arg: Optional[str]) -> Pa
 # ----------------------------
 def main():
     ap = argparse.ArgumentParser(description="Single runner: ROI + conf + tracking + persistence -> events + metrics (no re-inference).")
+    ap.epilog = "Output contract: All outputs are written under <run_folder>/events/<roi_id>/ and never overwrite other roi_id folders."
     ap.add_argument("--run-folder", required=True)
     ap.add_argument("--roi", required=True)
     ap.add_argument("--out", default=None)
