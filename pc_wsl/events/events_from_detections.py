@@ -1,5 +1,7 @@
+import subprocess
+import datetime
 #!/usr/bin/env python3
-__version__ = "v0.3.0"  # 2025-12-21
+__version__ = "v0.3.1 (2025-12-21)"  # 2025-12-21
 __repo_note__ = "events runner (ROI + persistence) - reproducibility stamp"
 
 import argparse, csv, json, math
@@ -77,6 +79,45 @@ def read_raw_count(obj: Dict[str, Any]) -> int:
 # ----------------------------
 # Track object
 # ----------------------------
+
+
+def _git_stamp() -> dict:
+    """
+    Returns git metadata if available; otherwise returns None fields.
+    Safe if script is copied outside repo.
+    """
+    import subprocess
+    from pathlib import Path
+
+    script_dir = Path(__file__).resolve().parent
+    def run_git(args):
+        try:
+            r = subprocess.run(
+                ["git", "-C", str(script_dir)] + args,
+                capture_output=True, text=True, check=True
+            )
+            return r.stdout.strip()
+        except Exception:
+            return None
+
+    commit = run_git(["rev-parse", "HEAD"])
+    describe = run_git(["describe", "--tags", "--always", "--dirty"])
+    is_dirty = None
+    try:
+        r = subprocess.run(
+            ["git", "-C", str(script_dir), "status", "--porcelain"],
+            capture_output=True, text=True, check=True
+        )
+        is_dirty = (r.stdout.strip() != "")
+    except Exception:
+        is_dirty = None
+
+    return {
+        "git_commit": commit,
+        "git_describe": describe,
+        "git_is_dirty": is_dirty
+    }
+
 class Track:
     def __init__(
         self,
@@ -560,6 +601,18 @@ def main():
         }
 
     metrics = {
+
+      "tool": {
+
+        "name": "events_from_detections.py",
+
+        "version": __version__,
+
+        "generated_at_utc": datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00","Z"),
+
+        **_git_stamp()
+
+      },
         # core run stats
         "video_filename": video_filename,
         "run_folder": str(run_folder),
