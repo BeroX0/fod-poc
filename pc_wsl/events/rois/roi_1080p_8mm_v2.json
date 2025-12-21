@@ -1,0 +1,7 @@
+{
+  "roi_id": "roi_1080p_8mm_v2",
+  "frame_size": [1920, 1080],
+  "lens_mm": 8,
+  "polygon": [[0,1075],[1700,1075],[1160,420],[0,420]],
+  "notes": "v2 from screenshots: left-biased road ROI, diagonal boundary approx; wide enough for zig-zag placements."
+}

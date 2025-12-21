@@ -1,0 +1,10 @@
+{
+  "roi_id": "roi_1080p_8mm_roadonly_v2",
+  "roi_version": "v2",
+  "frame_size": [1920, 1080],
+  "lens_mm": 8,
+  "polygon": [[0,1075],[1919,1075],[1919,915],[1600,725],[1256,517],[800,500],[0,470]],
+  "created_from_video": "run_10308.mp4",
+  "created_by": "SEP400 team",
+  "notes": "Road-only ROI aligned to user-marked blue boundary; polygon follows asphalt edge."
+}

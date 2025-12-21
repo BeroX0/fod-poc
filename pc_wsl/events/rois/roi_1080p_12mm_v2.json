@@ -1,0 +1,7 @@
+{
+  "roi_id": "roi_1080p_12mm_v2",
+  "frame_size": [1920, 1080],
+  "lens_mm": 12,
+  "polygon": [[0,1075],[1919,1075],[1120,400],[0,400]],
+  "notes": "v2 from screenshots: ROI shifted left to match asphalt; excludes top-right gravel; should include zig-zag objects on road."
+}

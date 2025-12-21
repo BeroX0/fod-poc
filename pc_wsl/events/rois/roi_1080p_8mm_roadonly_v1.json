@@ -1,0 +1,7 @@
+{
+  "roi_id": "roi_1080p_8mm_roadonly_v1",
+  "frame_size": [1920, 1080],
+  "lens_mm": 8,
+  "polygon": [[0,1075],[1919,1075],[1919,950],[1700,820],[1200,450],[0,450]],
+  "notes": "Road-only ROI for 8mm: boundary approximates asphalt edge using two diagonal segments to exclude grass/gravel."
+}

@@ -1,0 +1,10 @@
+{
+  "roi_id": "roi_1080p_12mm_roadonly_v1",
+  "roi_version": "v1",
+  "frame_size": [1920, 1080],
+  "lens_mm": 12,
+  "polygon": [[0,1075],[1919,1075],[1919,780],[1120,440],[0,440]],
+  "created_from_video": "run_106012.mp4",
+  "created_by": "SEP400 team",
+  "notes": "Road-only ROI aligned to asphalt boundary; excludes grass/gravel."
+}

@@ -1,0 +1,7 @@
+{
+  "roi_id": "roi_1080p_12mm_v1",
+  "frame_size": [1920, 1080],
+  "lens_mm": 12,
+  "polygon": [[260,1075],[1660,1075],[1180,580],[740,580]],
+  "notes": "Initial trapezoid for 12mm (narrower FOV); intended to cover road surface."
+}

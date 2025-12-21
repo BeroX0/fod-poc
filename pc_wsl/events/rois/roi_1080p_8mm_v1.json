@@ -1,0 +1,7 @@
+{
+  "roi_id": "roi_1080p_8mm_v1",
+  "frame_size": [1920, 1080],
+  "lens_mm": 8,
+  "polygon": [[80,1075],[1840,1075],[1300,520],[620,520]],
+  "notes": "Initial wide trapezoid for 8mm; intended to cover full road width incl. zig-zag placements."
+}
