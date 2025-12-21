@@ -1,7 +1,7 @@
 import subprocess
 import datetime
 #!/usr/bin/env python3
-__version__ = "v0.3.1 (2025-12-21)"  # 2025-12-21
+__version__ = "v0.3.2 (2025-12-21)"  # 2025-12-21
 __repo_note__ = "events runner (ROI + persistence) - reproducibility stamp"
 
 import argparse, csv, json, math
@@ -534,7 +534,25 @@ def main():
         raw_events.append(ev)
 
     # Deterministic ordering + deterministic IDs
-    raw_events.sort(key=lambda e: (int(e["start_frame"]), str(e["class_name"]), int(e["end_frame"]), int(e["rep_frame"])))
+    # Explicit deterministic ordering (tie-breakers are part of the contract)
+    EVENT_SORT_KEYS = [
+        "start_frame asc",
+        "class_name asc",
+        "rep_frame asc",
+        "max_confidence desc",
+        "end_frame asc"
+    ]
+
+    def _event_sort_key(e: dict):
+        # NOTE: -max_confidence gives descending confidence tie-break
+        return (
+            int(e["start_frame"]),
+            str(e["class_name"]),
+            int(e["rep_frame"]),
+            -float(e["max_confidence"]),
+            int(e["end_frame"]),
+        )
+    raw_events.sort(key=_event_sort_key)
     events: List[Dict[str, Any]] = []
     for i, ev in enumerate(raw_events, start=1):
         ev2 = dict(ev)
@@ -643,6 +661,10 @@ def main():
             "tracks_confirmed": tracks_confirmed
         },
         "total_events": len(events),
+        "event_ordering": {
+          "sort_keys": EVENT_SORT_KEYS,
+          "event_id_scheme": "ev_{index:04d} assigned after sorting"
+        },
 
         # renamed to prevent misinterpretation
         "proxy_events_per_minute": proxy_events_per_minute,
