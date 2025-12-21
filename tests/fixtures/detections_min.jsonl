@@ -1,0 +1,2 @@
+{"video_filename":"sample.mp4","width":1920,"height":1080,"fps_used_for_timestamps":30,"frame_index":0,"timestamp_s":0.0,"detections":[{"class_name":"bottle","confidence":0.90,"x1":100,"y1":200,"x2":160,"y2":300}]}
+{"frame_index":1,"timestamp_s":0.0333333,"detections":[]}
