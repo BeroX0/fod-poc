@@ -1,0 +1,52 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Virtual envs
+.venv/
+venv/
+ENV/
+.venv_fod/
+
+# Large data / media (never commit)
+*.mp4
+*.mov
+*.mkv
+*.avi
+
+# Model weights (keep outside git; download or place locally)
+*.pt
+*.onnx
+*.engine
+
+# Local dataset exports + outputs (your current reality)
+exports/
+fod_outputs/
+data/
+datasets/
+recordings/
+
+# Logs / run artifacts
+outputs/
+out/
+runs/
+*.log
+
+# Jupyter
+.ipynb_checkpoints/
