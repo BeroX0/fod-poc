@@ -50,3 +50,11 @@ runs/
 
 # Jupyter
 .ipynb_checkpoints/
+
+# Evidence Builder runtime artifacts (never commit)
+demo_pack/
+demo_pack.zip
+output/
+input/*.mp4
+input/videos/
+**/__pycache__/
