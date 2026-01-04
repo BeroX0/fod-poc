@@ -42,3 +42,8 @@ From the repo root:
 ```bash
 cd ~/projects/sep400-standby-fod-poc
 bash pc_wsl/evidence_builder/run_demo_pack_wsl.sh
+
+```
+## Documentation
+
+- Evidence Builder contract + reproduction: `docs/evidence_builder.md`
