@@ -1,4 +1,4 @@
-# SEP400 × Standby — FOD Camera Pack PoC
+# SEP400 × Standby - FOD Camera Pack PoC
 
 Reproducible Proof-of-Concept (PoC) pipeline for detecting FOD-like objects in a runway-like scenario using a car-mounted Jetson camera pack.
 
