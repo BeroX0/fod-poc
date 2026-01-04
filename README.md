@@ -1,4 +1,4 @@
-# FOD PoC — SEP400 × Standby AB (Jetson + Offline Pipeline + Evidence Builder)
+# FOD PoC
 
 This repository contains a Proof-of-Concept (PoC) pipeline for **Foreign Object Debris (FOD) detection on roads** using:
 - A **Jetson Orin Nano** camera pack for data capture (Arducam IMX477 + CS lenses),
