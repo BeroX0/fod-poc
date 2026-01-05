@@ -36,3 +36,20 @@ Phase 0 does NOT run camera or YOLO. It verifies:
 cd ~/projects/fod_poc/repo/sep400-standby-fod-poc/jetson/live_detection
 python3 live_detect.py --roi-id <ROI_ID> --debug --phase0-generate-dummy
 
+
+## Capture test (appsink)
+
+This is a Jetson-only sanity test that verifies we can pull frames from IMX477 via Argus using a Python
+GStreamer appsink (no OpenCV required).
+
+Run (10 seconds, 1920×1080 @ 30 FPS):
+```bash
+cd ~/projects/fod_poc/repo/sep400-standby-fod-poc
+python3 jetson/live_detection/gst_capture_test.py
+```
+
+
+Expected output:
+- `size=1920x1080 format=BGRx`
+- steady frame counts
+- final `avg_fps` close to ~30 (debug loop may show slightly below 30)
