@@ -37,6 +37,7 @@ cd ~/projects/fod_poc/repo/sep400-standby-fod-poc/jetson/live_detection
 python3 live_detect.py --roi-id <ROI_ID> --debug --phase0-generate-dummy
 
 
+```
 ## Capture test (appsink)
 
 This is a Jetson-only sanity test that verifies we can pull frames from IMX477 via Argus using a Python
