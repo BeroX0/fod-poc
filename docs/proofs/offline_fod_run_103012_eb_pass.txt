@@ -1,0 +1,25 @@
+Offline FOD (1-class) — run_103012 — EB PASS proof
+
+Date: 2026-01-07
+Video: run_103012.mp4
+ROI: roi_1080p_12mm_roadonly_v1.json
+Model: fod_1class_best.pt
+
+Offline runner params:
+  imgsz=640
+  conf=0.55
+  rep_conf=0.05
+  min_area=4000
+  confirm_n=4
+  end_miss_m=8
+  min_event_dur_s=0.30
+  cooldown_s=1.0
+
+EB result:
+  index validation PASS: 6/6 rows resolved
+  Events processed: 6
+  demo_pack.zip sha256: ec995898103adc75e23b92a85e54d5f4f418c8615a73cef999c76fc76ef62d8f
+
+BBox audit:
+  good_iou>=0.20: 6/6
+  each event IoU=1.000 on EB snapshot frame
