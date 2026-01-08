@@ -1,11 +1,22 @@
 #!/usr/bin/env python3
 import json
+import os
 from pathlib import Path
+
+def _eb_root() -> Path:
+    """Resolve Evidence Builder runtime root.
+    Preference: $EVIDENCE_DIR (if set), else current working directory.
+    """
+    env = os.environ.get("EVIDENCE_DIR")
+    if env:
+        return Path(env).expanduser()
+    return Path.cwd()
+
+EB_ROOT = _eb_root()
 
 # Paths
 FOD_OUTPUTS = Path.home() / "projects" / "fod_outputs"
-OUT_PATH = Path.home() / "evidence_builder" / "input" / "events_all.json"
-
+OUT_PATH = EB_ROOT / "input" / "events_all.json"
 all_events = []
 
 print(f"Scanning: {FOD_OUTPUTS}")

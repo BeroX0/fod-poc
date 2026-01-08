@@ -2,14 +2,26 @@
 import csv
 import json
 import subprocess
+import os
 from pathlib import Path
+def _eb_root() -> Path:
+    """Resolve Evidence Builder runtime root.
+    Preference: $EVIDENCE_DIR (if set), else current working directory.
+    """
+    env = os.environ.get("EVIDENCE_DIR")
+    if env:
+        return Path(env).expanduser()
+    return Path.cwd()
+
+EB_ROOT = _eb_root()
+
 import argparse
 
 # ----------------------------
 # Config
 # ----------------------------
-INPUT_DIR = Path.home() / "evidence_builder" / "input"
-OUTPUT_DIR = Path.home() / "evidence_builder" / "output"
+INPUT_DIR = EB_ROOT / "input"
+OUTPUT_DIR = EB_ROOT / "output"
 CLIPS_DIR = OUTPUT_DIR / "clips"
 SNAPS_DIR = OUTPUT_DIR / "snapshots"
 INDEX_PATH = OUTPUT_DIR / "index.csv"

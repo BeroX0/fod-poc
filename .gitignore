@@ -58,3 +58,4 @@ output/
 input/*.mp4
 input/videos/
 **/__pycache__/
+*.py[cod]

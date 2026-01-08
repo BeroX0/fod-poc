@@ -6,6 +6,14 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "SCRIPT_DIR=$SCRIPT_DIR"
 echo "EVIDENCE_DIR=$EVIDENCE_DIR"
+# Fail fast if EVIDENCE_DIR is read-only (common when running against frozen bundles)
+if [ ! -w "$EVIDENCE_DIR" ]; then
+  echo "ERROR: EVIDENCE_DIR is not writable: $EVIDENCE_DIR" >&2
+  echo "Hint: rerun using a writable workspace, e.g.:" >&2
+  echo "  EVIDENCE_DIR=$HOME/projects/fod_poc/workspace/eb_reruns/<run> bash $0" >&2
+  exit 2
+fi
+
 
 [ -d "$EVIDENCE_DIR" ] || { echo "ERROR: EVIDENCE_DIR not found: $EVIDENCE_DIR"; exit 2; }
 [ -f "$EVIDENCE_DIR/input/events.json" ] || { echo "ERROR: Missing $EVIDENCE_DIR/input/events.json"; exit 2; }
