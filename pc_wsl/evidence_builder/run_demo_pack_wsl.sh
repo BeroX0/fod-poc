@@ -10,17 +10,15 @@ echo "EVIDENCE_DIR=$EVIDENCE_DIR"
 [ -d "$EVIDENCE_DIR" ] || { echo "ERROR: EVIDENCE_DIR not found: $EVIDENCE_DIR"; exit 2; }
 [ -f "$EVIDENCE_DIR/input/events.json" ] || { echo "ERROR: Missing $EVIDENCE_DIR/input/events.json"; exit 2; }
 
-# Enforce repo scripts as source-of-truth
-install -m 644 "$SCRIPT_DIR/batch_evidence.py"     "$EVIDENCE_DIR/batch_evidence.py"
-install -m 755 "$SCRIPT_DIR/make_demo_pack.py"     "$EVIDENCE_DIR/make_demo_pack.py"
-install -m 644 "$SCRIPT_DIR/collect_all_events.py" "$EVIDENCE_DIR/collect_all_events.py"
-
 cd "$EVIDENCE_DIR"
 
-rm -rf output/clips output/snapshots output/index.csv demo_pack demo_pack.zip
+# Clean previous outputs (runtime only)
+rm -rf output/clips output/snapshots output/index.csv demo_pack demo_pack.zip demo_pack.zip.sha256
 mkdir -p output
 
-python3 batch_evidence.py
-python3 make_demo_pack.py
+# Run repo scripts directly with CWD set to EVIDENCE_DIR
+python3 "$SCRIPT_DIR/batch_evidence.py"
+python3 "$SCRIPT_DIR/make_demo_pack.py"
 
-sha256sum demo_pack.zip
+# Record checksum deterministically
+sha256sum demo_pack.zip | tee demo_pack.zip.sha256
