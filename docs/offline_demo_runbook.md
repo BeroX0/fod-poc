@@ -22,7 +22,7 @@ The pack contains clips + snapshots + bbox overlays for each detected FOD “eve
 - Repo scripts (source-of-truth) available:
   - `tools/verify_offline_fod_pack.sh`
   - `tools/run_demo_offline_from_bundles.sh`
-  - `pc_wsl/offline/offline_detect_run_coco.py`
+  - `pc_wsl/offline/offline_detect_run_coco.py` (legacy/manual; canonical demo uses tools/run_demo_offline_from_bundles.sh)
   - `pc_wsl/evidence_builder/run_demo_pack_wsl.sh`
 
 Important:
