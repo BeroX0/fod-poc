@@ -129,6 +129,19 @@ python3 "$REPO/pc_wsl/evidence_builder/batch_evidence.py" | tee "$EXPORT/eb_batc
 echo "[eb] step 2: make_demo_pack.py"
 python3 "$REPO/pc_wsl/evidence_builder/make_demo_pack.py" | tee "$EXPORT/eb_pack.log"
 
+
+# Copy demo_pack (zip + checksums) into the export folder too
+if [[ -d "$REPO/demo_pack" ]]; then
+  mkdir -p "$EXPORT/demo_pack"
+  rsync -a --delete "$REPO/demo_pack/" "$EXPORT/demo_pack/"
+fi
+
+# (optional safety) if a top-level demo_pack.zip ever exists, capture it too
+if [[ -f "$REPO/demo_pack.zip" ]]; then
+  cp -f "$REPO/demo_pack.zip" "$EXPORT/" || true
+fi
+
+
 # Copy EB outputs into export dir (per-run, no mixing)
 mkdir -p "$EXPORT/eb_output"
 rsync -a --delete "$REPO/output/" "$EXPORT/eb_output/"
