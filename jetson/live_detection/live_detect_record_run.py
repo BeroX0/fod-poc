@@ -163,6 +163,10 @@ def main() -> int:
     ap.add_argument("--end_miss_m", type=int, default=10)
     ap.add_argument("--min_event_dur_s", type=float, default=0.25)
     ap.add_argument("--cooldown_s", type=float, default=1.0)
+    ap.add_argument("--show", action="store_true", help="Show live preview window with overlay (ROI + bbox)")
+    ap.add_argument("--show_every_n", type=int, default=2, help="Update preview every N frames (reduce load)")
+    ap.add_argument("--show_scale", type=float, default=0.75, help="Scale factor for preview window")
+    ap.add_argument("--show_window_name", default="live_fod", help="Window title for preview")
 
     args = ap.parse_args()
 
@@ -354,6 +358,26 @@ def main() -> int:
                     if state.missing_streak >= args.end_miss_m:
                         close_event(state.last_seen_t)
 
+            # Live preview window (NanoOWL-style): ROI polygon + best bbox + label
+            if args.show and (frames % max(1, args.show_every_n) == 0):
+                overlay_show = frame.copy()
+                cv2.polylines(overlay_show, [roi_poly.reshape((-1, 1, 2))], isClosed=True, color=(255, 0, 0), thickness=2)
+                if best is not None:
+                    c, name, bbox = best
+                    x1, y1, x2, y2 = map(int, map(round, bbox))
+                    cv2.rectangle(overlay_show, (x1, y1), (x2, y2), (0, 255, 0), 2)
+                    cv2.putText(overlay_show, f"{name} {c:.2f}", (x1, max(0, y1 - 8)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+            
+                if args.show_scale and args.show_scale != 1.0:
+                    h, w = overlay_show.shape[:2]
+                    overlay_show = cv2.resize(overlay_show, (int(w * args.show_scale), int(h * args.show_scale)))
+            
+                cv2.imshow(args.show_window_name, overlay_show)
+                k = cv2.waitKey(1) & 0xFF
+                if k in (27, ord('q')):
+                    print('[ui] quit requested (ESC/q)')
+                    break
+            
             # Periodic debug overlay (ROI + bbox if present)
             if frames % args.save_every_n == 0:
                 overlay = frame.copy()
@@ -393,6 +417,11 @@ def main() -> int:
         return 0
 
     finally:
+        try:
+            cv2.destroyAllWindows()
+        except Exception:
+            pass
+
         pipeline.set_state(Gst.State.NULL)
 
 
