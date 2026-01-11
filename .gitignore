@@ -58,3 +58,15 @@ output/
 input/*.mp4
 input/videos/
 **/__pycache__/
+*.py[cod]
+
+# Runtime artifacts (do not commit)
+output/
+demo_pack/
+input/*.mp4
+input/events.json
+
+# Local patch backups (never commit)
+*.bak_show_*
+*.bak_showfix_*
+*.bak_fix_apap_*

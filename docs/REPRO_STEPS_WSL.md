@@ -24,7 +24,7 @@ VID="$FOD_EXPORT_ROOT/videos/run_106012.mp4"
 python pc_wsl/offline_infer/offline_infer.py \
   --video "$VID" \
   --outdir "$FOD_OUT_ROOT" \
-  --model yolov8n.pt \
+  --model /home/beros/projects/fod_poc/models/yolov8n.pt \
   --device 0 \
   --conf 0.25 \
   --imgsz 640 \

@@ -8,9 +8,18 @@ import os
 import zipfile
 from pathlib import Path
 
-HOME = Path.home()
-EB = HOME / "evidence_builder"
+def _eb_root() -> Path:
+    """Resolve Evidence Builder runtime root.
+    Preference: $EVIDENCE_DIR (if set), else current working directory.
+    """
+    env = os.environ.get("EVIDENCE_DIR")
+    if env:
+        return Path(env).expanduser()
+    return Path.cwd()
 
+EB_ROOT = _eb_root()
+HOME = Path.home()  # kept for backward compatibility
+EB = EB_ROOT
 EVENTS_JSON = EB / "input" / "events.json"
 OUT = EB / "demo_pack"
 OUT_EVENTS = OUT / "events"
