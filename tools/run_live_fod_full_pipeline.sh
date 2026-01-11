@@ -152,6 +152,7 @@ cat > "$EXPORT/MANIFEST.txt" <<EOF
 RUN_TAG=$RUN_TAG
 GIT_HEAD=$GIT_HEAD
 MP4=$MP4_BASENAME
+DEMO_PACK_DIR=demo_pack
 EVENTS=events.json
 ROI=$(basename "$ROI_REL")
 MODEL=$(basename "$MODEL")
