@@ -1,5 +1,3 @@
-cat > docs/demo_day_checklist.md <<'MD'
-
 Demo Day Checklist (Offline Golden Demo)
 Before the demo (5–10 minutes)
 
