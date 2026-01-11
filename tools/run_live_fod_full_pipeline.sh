@@ -124,10 +124,10 @@ echo "[eb] input/$MP4_BASENAME -> $EXPORT/$MP4_BASENAME"
 
 # Run Evidence Builder
 echo "[eb] step 1: batch_evidence.py"
-python3 "$REPO/pc_wsl/evidence_builder/batch_evidence.py" | tee "$EXPORT/eb_batch.log"
+python3 "$REPO/pc_wsl/evidence_builder/batch_evidence.py" < /dev/null | tee "$EXPORT/eb_batch.log"
 
 echo "[eb] step 2: make_demo_pack.py"
-python3 "$REPO/pc_wsl/evidence_builder/make_demo_pack.py" | tee "$EXPORT/eb_pack.log"
+python3 "$REPO/pc_wsl/evidence_builder/make_demo_pack.py" < /dev/null | tee "$EXPORT/eb_pack.log"
 
 
 # Copy demo_pack (zip + checksums) into the export folder too
