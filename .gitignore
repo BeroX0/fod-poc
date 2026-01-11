@@ -70,3 +70,5 @@ input/events.json
 *.bak_show_*
 *.bak_showfix_*
 *.bak_fix_apap_*
+/demo_pack/
+/output/
